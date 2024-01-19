@@ -10,7 +10,7 @@
 You can install the package via composer:
 
 ```bash
-composer require mt1sk/livewire-multiselect
+composer require etdte/livewire-multiselect
 ```
 ## Usage
 
