@@ -155,7 +155,7 @@ class Select extends Component
     protected function emitSelect()
     {
         if (!$this->simpleForm) {
-            $this->emitUp('select', [
+            $this->dispatch('select', [
                 'name'      => $this->name,
                 'value'     => $this->multiselect ? $this->selectedItems : $this->selectedItems->first(),
                 'parent_id' => $this->parentId,
