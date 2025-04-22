@@ -10,7 +10,7 @@ trait HasSelect
     /**
      * @param $event
      */
-    #[On('select')]
+    #[On('multiselect.select')]
     public function select($event)
     {
         // this component should not listen events for another one
