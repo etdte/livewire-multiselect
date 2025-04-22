@@ -4,6 +4,7 @@ namespace LivewireMultiselect\Components;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Select extends Component
@@ -76,8 +77,6 @@ class Select extends Component
      */
     public bool $isOpen = false;
 
-    protected $listeners = ['refresh', 'refreshOptions'];
-
     public function mount($selected = null)
     {
         $this->selectedItems = collect($selected ?: null);
@@ -127,6 +126,7 @@ class Select extends Component
             });
     }
 
+    #[On('refresh')]
     public function refresh($data)
     {
         if ($this->parentId !== null && $this->parentId !== $data['id']) {
@@ -136,6 +136,7 @@ class Select extends Component
         $this->selectedItems = collect(Arr::get($data, $this->name));
     }
 
+    #[On('refreshOptions')]
     public function refreshOptions(array $options, string $name, ?string $parentId = null)
     {
         if ($this->parentId !== null && $this->parentId !== $parentId) {
@@ -155,7 +156,7 @@ class Select extends Component
     protected function emitSelect()
     {
         if (!$this->simpleForm) {
-            $this->dispatch('select', [
+            $this->dispatch('multiselect.select', [
                 'name'      => $this->name,
                 'value'     => $this->multiselect ? $this->selectedItems : $this->selectedItems->first(),
                 'parent_id' => $this->parentId,
