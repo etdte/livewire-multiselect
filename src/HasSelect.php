@@ -32,5 +32,9 @@ trait HasSelect
                 break;
             }
         }
+
+        if (method_exists($this, 'resetPage')) {
+            $this->resetPage();
+        }
     }
 }
