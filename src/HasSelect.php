@@ -3,16 +3,18 @@
 namespace LivewireMultiselect;
 
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Attributes\On;
 
 trait HasSelect
 {
     /**
      * @param $event
      */
+    #[On('select')]
     public function select($event)
     {
         // this component should not listen events for another one
-        if (!empty($event['parent_id']) && $this->id !== $event['parent_id']) {
+        if (!empty($event['parent_id']) && $this->getId() !== $event['parent_id']) {
             return;
         }
 
