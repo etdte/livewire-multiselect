@@ -94,11 +94,13 @@ You can refresh selected items by calling in your component
 $this->reset('teamFilter');
 $this->anotherFilter = [2,3];
 // reset options on all component selects
-$this->dispatch('refresh', $this)->to('multiselect');
+$this->dispatch('refresh', $this)->to('multiselect'); // Livewire 3
+$this->emitTo('multiselect', 'refresh', $this); // Livewire 2
 
 // you can also do something like this,
 // BUT ALL NOT PASSED SELECTS, WITHIN THE COMPONENT, WILL BE RESET TO EMPTY.
-$this->dispatch('refresh', ['id' => $this->getId(), 'teamFilter' => [2]])->to('multiselect');
+$this->dispatch('refresh', ['id' => $this->getId(), 'teamFilter' => [2]])->to('multiselect'); // Livewire 3
+$this->emitTo('multiselect', 'refresh', ['id' => $this->id, 'teamFilter' => [2]]); // Livewire 2
 ```
 You can also refresh available options 
 ```php
@@ -106,7 +108,8 @@ $teams = $this->teams->take(3);
 // $teams - available options
 // 'teamFilter' - select name
 // $this->getId() - component id(parentId)
-$this->dispatch('refreshOptions', $teams, 'teamFilter', $this->getId())->to('multiselect');
+$this->dispatch('refreshOptions', $teams, 'teamFilter', $this->getId())->to('multiselect'); // Livewire 3
+$this->emitTo('multiselect', 'refreshOptions', $teams, 'teamFilter', $this->id); // Livewire 2
 ```
 
 ### Customizing
